@@ -27,6 +27,27 @@ const Main = (props) => {
     getPeople();
   };
 
+  const updatePeople = async (person, id) => {
+    // make put request ot create people
+    await fetch(URL + id, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(person),
+    });
+    getPeople();
+  };
+
+  const deletePeople = async (id) => {
+    //make delete request to create people
+    await fetch(URL + id, {
+      method: "delete",
+    });
+    // update list of people
+    getPeople();
+  };
+
   useEffect(() => getPeople(), []);
 
   return (
@@ -36,7 +57,16 @@ const Main = (props) => {
           path="/"
           element={<People people={people} createPeople={createPeople} />}
         />
-        <Route path="/people/:id" element={<Show />} />
+        <Route
+          path="/people/:id"
+          element={
+            <Show
+              people={people}
+              updatePeople={updatePeople}
+              deletePeople={deletePeople}
+            />
+          }
+        />
       </Routes>
     </main>
   );

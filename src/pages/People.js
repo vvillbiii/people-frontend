@@ -43,6 +43,7 @@ const People = (props) => {
   };
   return (
     <section>
+      <h3> Create a new Person</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
